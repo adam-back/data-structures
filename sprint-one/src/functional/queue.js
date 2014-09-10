@@ -7,13 +7,6 @@ var makeQueue = function(){
   var add = 0;
   var remove = 0;
 
-  // Implement the methods below
-  // 0: a
-
-  // size = 1;
-  // count = 0;
-
-
   someInstance.enqueue = function(value){
     storage[add] = value;
     add++
