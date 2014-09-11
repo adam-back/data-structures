@@ -2,10 +2,10 @@ var makeStack = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
   var makeInstance = {
-    stack : {},
-    numContents : 0
+    stack: {},
+    numContents: 0
   };
-  extend(makeInstance, makeStack.stackMethods);
+  extend(makeInstance, stackMethods);
   console.log(makeInstance);
 return makeInstance;
 };
@@ -16,22 +16,22 @@ var extend = function (to, from) {
   }
 };
 
-makeStack.stackMethods = {
+stackMethods = {
 
   //numContents method
-
   size: function() {
-    return this.numContents;
+    return numContents;
   },
   //pop method
   remove: function() {
     var removed = stack[numContents-1];
+    var length = numContents-1
     delete stack[numContents-1];
     numContents--;
     return removed;
   },
   //add method
-  add: function(value) {
+  push: function(value) {
     stack[numContents-1] = value;
     numContents++;
   }
