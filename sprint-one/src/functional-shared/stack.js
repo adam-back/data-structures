@@ -37,5 +37,18 @@ var stackMethods = {
     this.numContents++;
   }
 };
+// var lunchLine = makeStack();
+// lunchLine.makeIntace = {
+//   stack{}
+//   numContents
+//   size
+//   pop
+//   push
+// }
 
+// lunchLine.makeInstance = {
+//   stack {}
+//   numContents
+// }
+// }
 
