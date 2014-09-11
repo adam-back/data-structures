@@ -6,8 +6,8 @@ var makeStack = function() {
     numContents: 0
   };
   extend(makeInstance, stackMethods);
-  console.log(makeInstance);
-return makeInstance;
+  // console.log(makeInstance);
+  return makeInstance;
 };
 
 var extend = function (to, from) {
@@ -16,25 +16,34 @@ var extend = function (to, from) {
   }
 };
 
-stackMethods = {
+// stack = {
+
+// }
+//numContents = 0;
+var stackMethods = {
 
   //numContents method
   size: function() {
-    return numContents;
+    return this.numContents;
   },
   //pop method
-  remove: function() {
-    var removed = stack[numContents-1];
-    var length = numContents-1
-    delete stack[numContents-1];
-    numContents--;
+  pop: function() {
+    var removed = this.stack[this.numContents-1];
+    delete this.stack[this.numContents-1];
+    if(this.numContents !== 0) {
+      this.numContents--;
+    }
     return removed;
   },
   //add method
   push: function(value) {
-    stack[numContents-1] = value;
-    numContents++;
+
+    this.stack[this.numContents] = value;
+    this.numContents++;
   }
 };
 
-
+//take aways:
+//1. pop and push need to be appropriately named
+//2. this keyword usage
+//3. Create or use extend
