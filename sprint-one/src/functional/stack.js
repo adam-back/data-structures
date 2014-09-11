@@ -22,6 +22,7 @@ var makeStack = function(){
     if(size < 0) {
       size = 0;
     }
+
     return size;
   };
 
