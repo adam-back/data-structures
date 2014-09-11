@@ -23,3 +23,4 @@ Stack.prototype.pop = function() {
   }
   return popped;
 }
+
