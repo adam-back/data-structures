@@ -32,18 +32,21 @@ var makeLinkedList = function(){
   // O(1) bc no cascading changes to rest of list
 
   list.contains = function(target){
-    var found = false;
+    // var found = false;
 
     var walk = function(position) {
       if(position.value === target) {
-        found = true;
+        return true;
       } else if (position.next !== null) {
-        walk(position.next);
+        return walk(position.next);
+      } else {
+        return false;
       }
     }
 
-    walk(list.head);
-    return found;
+    return walk(list.head);
+    // return found;
+    // return false;
   };
   //O(n) bc you may have to search the whole list
   return list;
