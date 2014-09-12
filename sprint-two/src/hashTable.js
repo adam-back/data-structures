@@ -6,36 +6,42 @@ var HashTable = function(){
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
   var newObj = {};
-  if(this._storage[i]!==null) {
+  newObj[k] = v;
+  console.log('storage', this._storage[i]);
+  if(this._storage[i]===undefined) {
     this._storage[i] = [];
-    newObj[k] = v;
-    // console.log('obj', newObj,'at k', newObj[k]);
     this._storage[i].push(newObj);
-    // console.log('store', this._storage[i]);
   } else {
-    var prevContents = this._storage[i];
-  }
+      this._storage[i].push(newObj);
+      console.log('ra', this._storage[i], 'nobj', newObj);
+    }
 };
+//O(1) adding always to end does not affect rest of array contents
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
 
   for(var j = 0; j < this._storage[i].length; j++) {
-    console.log('array,', this._storage[i], 'length,', this._storage[i].length);
     for(var key in this._storage[i][j]) {
-      console.log('obj', this._storage[i][j][key]);
       if(key===k) {
-        console.log('return',this._storage[i][j][key])
         return this._storage[i][j][key];
       }
     }
   }
 };
+// O(n) We have to go through the array n times, but there is only one key
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  this._storage[i] = null;
+    for(var j = 0; j < this._storage[i].length; j++) {
+      for(var key in this._storage[i][j]) {
+        if(key===k) {
+          this._storage[i][j][key] = null;
+      }
+    }
+  }
 };
+// O(n) same as retreive
 
 
 
