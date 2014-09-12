@@ -15,6 +15,7 @@ var makeLinkedList = function(){
       list.tail = list.value;
      }
   };
+  //O(1)
 
   list.removeHead = function(){
     var oldHead = list.head.value;
@@ -23,6 +24,7 @@ var makeLinkedList = function(){
     list.head = newHead;
     return oldHead;
   };
+  //O(1)
 
   list.contains = function(target) {
     var doesContain = false;
@@ -39,7 +41,7 @@ var makeLinkedList = function(){
 
     return doesContain;
   };
-
+  //O(n)
   return list;
 };
 
