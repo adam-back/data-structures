@@ -7,13 +7,11 @@ HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
   var newObj = {};
   newObj[k] = v;
-  console.log('storage', this._storage[i]);
   if(this._storage[i]===undefined) {
     this._storage[i] = [];
     this._storage[i].push(newObj);
   } else {
       this._storage[i].push(newObj);
-      console.log('ra', this._storage[i], 'nobj', newObj);
     }
 };
 //O(1) adding always to end does not affect rest of array contents
