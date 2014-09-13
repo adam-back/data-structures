@@ -32,8 +32,6 @@ var makeLinkedList = function(){
   // O(1) bc no cascading changes to rest of list
 
   list.contains = function(target){
-    // var found = false;
-
     var walk = function(position) {
       if(position.value === target) {
         return true;
@@ -45,8 +43,6 @@ var makeLinkedList = function(){
     }
 
     return walk(list.head);
-    // return found;
-    // return false;
   };
   //O(n) bc you may have to search the whole list
   return list;

@@ -66,18 +66,18 @@ var TreeMethods = {
 
   depthFirstLog: function(callback) {
     //create a function which takes in a node
-    var exec = function (n) {
+    var execute = function (n) {
       //callback(node.value)
       callback(n.value);
       //if node.left
       if(n.left) {
         //return recurse(node.left)
-        exec(n.left);
+        execute(n.left);
       } else if(n.right) {
-        exec(n.right);
+        execute(n.right);
       }
     }
-    return exec(this);
+    return execute(this);
   }
 }
 // O(n) go through each node's value
