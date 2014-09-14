@@ -9,14 +9,14 @@ var makeTree = function(value){
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
-    this.value = value;
-    this.children.push(makeTree(value));
+  var newChild = makeTree(value);
+  this.children.push(newChild);
 };
 
 treeMethods.contains = function(target){
 
   var searchNodes = function(node) {
-    // console.log('node', node);
+    console.log('node', node);
     if(node.value === target) {
       return true;
     } else if (node.children.length>0) {
