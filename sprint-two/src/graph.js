@@ -5,22 +5,14 @@ var Graph = function(){
 
 Graph.prototype.addNode = function(newNode, toNode){
   //add newNode to web at key of newNode
-
-  this.web[newNode] = newNode;
-  this.web[newNode.edges] = [];
-
+  this.web[newNode] = {"edges": []};
   this.size++;
   //if the size is 2
   if(this.size === 2) {
     //iterate through web
     for(var key in this.web) {
       //add edge between first key's node and newNode
-      if(key!==newNode) {
-        this.web[key.edges].push(newNode);
-        //add edge between new node and first key's node
-        this.web[newNode.edges].push(key);
-
-      }
+      this.addEdge(key, newNode);
       break;
     }
   } else if (toNode) {
@@ -29,6 +21,7 @@ Graph.prototype.addNode = function(newNode, toNode){
 
 
   //Problem -- nodes list themselves as edges.. is that a big deal?
+  //fixed problem -AB
 };
 
 Graph.prototype.contains = function(node){
@@ -45,15 +38,18 @@ Graph.prototype.contains = function(node){
 };
 
 Graph.prototype.removeNode = function(node){
-  delete this.web[node];
-  if(this.web[node.edges]){
-    this.removeEdge(node, this.web[node.edges]);
+  var edges = this.web[node]["edges"];
+  if(edges) {
+    for(var i = 0; i < edges.length; i++) {
+      this.removeEdge(node, edges[i]);
+    }
   }
+  delete this.web[node];
 };
 
 Graph.prototype.getEdge = function(fromNode, toNode){
-  var edgesList = this.web[fromNode.edges];
-  if(edgesList===undefined) {
+  var edgesList = this.web[fromNode]["edges"];
+  if(edgesList === []) {
     return false;
   }
   for(var i = 0; i < edgesList.length; i++) {
@@ -66,22 +62,34 @@ Graph.prototype.getEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
-  this.web[fromNode.edges].push(toNode);
-  this.web[toNode.edges].push(fromNode);
+  //add edge fromNome --> toNode
+  var edges = this.web[fromNode]["edges"];
+  edges.push(toNode);
+  this.web[fromNode] = {"edges": edges};
+
+  //add edge toNode -->fromNode
+  edges = this.web[toNode]["edges"];
+  edges.push(fromNode);
+  this.web[toNode] = {"edges": edges};
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
-  var toIndex = this.web[fromNode.edges].indexOf(toNode);
-  var fromIndex = this.web[toNode.edges].indexOf(fromNode);
-  delete this.web[fromNode.edges][toIndex];
-  delete this.web[toNode.edges][fromIndex];
+  var fromEdges = this.web[fromNode]["edges"];
+  var toEdges = this.web[toNode]["edges"]
+  fromEdges.splice(fromEdges.indexOf(toNode), 1);
+  toEdges.splice(toEdges.indexOf(fromNode), 1);
 
-  if(this.web[fromNode.edges]) {
-    delete this.web[fromNode];
+  //replace back in nodes if there are still edges
+  if(fromEdges.length === 0) {
+    this.removeNode(fromNode);
+  } else {
+    this.web[fromNode] = {"edges": fromEdges}
+  }
 
-  } else if(!this.web[toNode.edges]) {
-
-    this.web[toNode]=null;
+  if(toEdges.length === 0) {
+    this.removeNode(toNode);
+  } else {
+    this.web[toNode] = {"edges": toEdges}
   }
 
 };
