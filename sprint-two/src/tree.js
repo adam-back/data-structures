@@ -1,7 +1,8 @@
-var makeTree = function(value){
+var makeTree = function(value, parent){
   var newTree = {};
   newTree.value = value;
   newTree.children = [];
+  newTree.parent = parent;
   _.extend(newTree, treeMethods);
   return newTree;
 };
@@ -9,26 +10,27 @@ var makeTree = function(value){
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
-  var newChild = makeTree(value);
+
+  var newChild = makeTree(value, this);
+  this.value = value;
   this.children.push(newChild);
 };
 
 treeMethods.contains = function(target){
+  var flag = false;
 
   var searchNodes = function(node) {
-    console.log('node', node);
+
     if(node.value === target) {
-      return true;
+      flag = true;
     } else if (node.children.length>0) {
-      // console.log('children',node.children,'length', node.children.length);
       for(var i = 0; i < node.children.length; i++) {
-        // console.log('infor', node.children[i]);
         searchNodes(node.children[i]);
       }
-      return false;
     }
   }
-  return searchNodes(this);
+  searchNodes(this)
+  return flag;
 };
 
 
