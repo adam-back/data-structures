@@ -16,7 +16,7 @@ describe('graph', function() {
 
   it('should store values as nodes that were inserted', function() {
     graph.addNode('kittens');
-    graph.contains('kittens');
+    // graph.contains('kittens'); redundant and not testing
     expect(graph.contains('kittens')).to.equal(true);
   });
 
