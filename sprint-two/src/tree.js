@@ -3,6 +3,7 @@ var makeTree = function(value, parent){
   newTree.value = value;
   newTree.children = [];
   newTree.parent = parent;
+  //adds functionality but is not necessary for this implementation re: specs
   _.extend(newTree, treeMethods);
   return newTree;
 };
@@ -10,7 +11,6 @@ var makeTree = function(value, parent){
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
-
   var newChild = makeTree(value);
   newChild.parent = this;
   this.children.push(newChild);
