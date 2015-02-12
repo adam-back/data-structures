@@ -8,10 +8,10 @@ define(['../../lib/chai/chai.js', '../../lib/underscore/underscore.js'], functio
       };
 
       if(!patternIs(
-        'functional',
-        'functional-shared',
-        'prototypal',
-        'pseudoclassical'
+        // 'functional'
+        'functional-shared'
+        // 'prototypal',
+        // 'pseudoclassical'
       )){
         throw new Error('Unrecognized class pattern');
       }

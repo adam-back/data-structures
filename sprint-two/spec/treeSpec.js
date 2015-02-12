@@ -18,6 +18,8 @@ describe('tree', function() {
 
   it('should return true for a value that the tree contains', function(){
     tree.addChild(5);
+    tree.addChild(6);
+    tree.addChild(7);
     expect(tree.contains(5)).to.equal(true);
   });
 

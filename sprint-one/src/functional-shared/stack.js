@@ -6,8 +6,8 @@ var makeStack = function() {
     numContents: 0
   };
   extend(makeInstance, stackMethods);
-  // console.log(makeInstance);
-  return makeInstance;
+
+return makeInstance;
 };
 
 var extend = function (to, from) {
@@ -16,12 +16,7 @@ var extend = function (to, from) {
   }
 };
 
-// stack = {
-
-// }
-//numContents = 0;
 var stackMethods = {
-
   //numContents method
   size: function() {
     return this.numContents;
@@ -30,14 +25,15 @@ var stackMethods = {
   pop: function() {
     var removed = this.stack[this.numContents-1];
     delete this.stack[this.numContents-1];
-    if(this.numContents !== 0) {
+
+    if(this.numContents > 0) {
       this.numContents--;
     }
+
     return removed;
   },
   //add method
   push: function(value) {
-
     this.stack[this.numContents] = value;
     this.numContents++;
   }

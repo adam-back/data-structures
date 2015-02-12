@@ -1,21 +1,36 @@
-var makeTree = function(value){
+var makeTree = function(value, parent){
   var newTree = {};
   newTree.value = value;
-  newTree.children = undefined;
+  newTree.children = [];
+  newTree.parent = parent;
+  //adds functionality but is not necessary for this implementation re: specs
+  _.extend(newTree, treeMethods);
   return newTree;
 };
-
-
-
 
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
-
+  var newChild = makeTree(value);
+  newChild.parent = this;
+  this.children.push(newChild);
 };
 
 treeMethods.contains = function(target){
+  var flag = false;
 
+  var searchNodes = function(node) {
+
+    if(node.value === target) {
+      flag = true;
+    } else if (node.children.length>0) {
+      for(var i = 0; i < node.children.length; i++) {
+        searchNodes(node.children[i]);
+      }
+    }
+  }
+  searchNodes(this)
+  return flag;
 };
 
 
